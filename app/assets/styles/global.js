@@ -11,7 +11,11 @@ export const globalStyles = StyleSheet.create({
         backgroundColor: '#fff',
         justifyContent: 'center',
         alignItems: 'center',
+        textAlign: 'center',
         flex:1,
+        backgroundColor: "#7e28e2", 
+        paddingLeft: windowWidth /4,
+        paddingRight: windowWidth /4,
     },
     buttonContainer: {
         marginTop: 10,

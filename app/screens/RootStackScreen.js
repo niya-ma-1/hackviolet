@@ -33,26 +33,34 @@ export default function RootStackScreen() {
       <Stack.Screen name='Home' component={SplashScreen} options={ ({navigation}) => ({
           headerRight: () => (
             <View style={{flexDirection:"row"}}>
-              <View style={{flex:1, padding:20}}>
+              <View style={{padding:10, alignSelf:'center', }}>
                   <Button onPress={() => navigation.navigate('Questions')}
                     title="Questions"
-                    color="#841584"
-                    accessibilityLabel="Questions"
-                />
+                    color="#ffc2e0"
+                    accessibilityLabel="Questions"/>
               </View>
-              <View style={{flex:1, marginRight: 70, marginTop:10}}>
+              <View style={{ padding:10, alignSelf:'center', }}>
+                <Button onPress={() => navigation.navigate('Sign Up')}
+                    title="Sign Up"
+                    color="#ffc2e0"
+                    accessibilityLabel="Sign Up"
+                  />
+                </View>
+              <View style={{ padding:10, }}>
                   <SocialIcon title='Sign In With Google' 
                   button type='google' 
                   width='200'
-                  onPress={() => navigation.navigate('SplashScreen')}
+                  onPress={() => navigation.navigate('SignUpScreen')}
                   style={{backgroundColor:'#ffc2e0', height:40, width:200}}
                   iconStyle={{color:"blue"}}
                   ></SocialIcon>
+                
               </View>
               
           </View>
           ),
         })}/>
+
       <Stack.Screen name='Questions' component={Questions} options={ ({navigation}) => ({
           headerRight: () => (
             
@@ -68,6 +76,15 @@ export default function RootStackScreen() {
       })}/>
 
       <Stack.Screen name='QuestionScreen' component={QuestionScreen} ons={({navigation}) => ({
+          headerRight: () => (
+            <View>
+              <Icon.Button name="google" size={30} color="#" />
+              <Button onPress={() => navigation.navigate('Question')} title="Questions" color="#841584" accessibilityLabel="Questions" />
+            </View>
+          ),
+        })}/>
+
+      <Stack.Screen name='Sign Up' component={SignUpScreen} ons={({navigation}) => ({
           headerRight: () => (
             <View>
               <Icon.Button name="google" size={30} color="#" />

@@ -1,9 +1,15 @@
 import React, {useState} from "react";
-import { Text, View, Image } from 'react-native';
 import { globalStyles, images } from '../assets/styles/global';
 import FormInput from '../components/FormInput';
 import FormButton from '../components/FormButton';
 import FormTextClicable from '../components/FormTextClicable';
+import { Text, View, Image, TouchableOpacity } from 'react-native';
+import * as Animatable from 'react-native-animatable';
+import { StyleSheet } from "react-native";
+import { Button } from 'react-native';
+import { NavigationContainer } from '@react-navigation/native';
+import { createNativeStackNavigator } from '@react-navigation/native-stack';
+import { ImageBackground } from 'react-native-web';
 
 
 const SignUpScreen = ({ navigation }) => {
@@ -17,7 +23,7 @@ const SignUpScreen = ({ navigation }) => {
     //TODO: add a button to unhide the password entry, the eye icon
 
 
-    const SignUp = () => {
+    const SignUp = ({ }) => {
         if (password == confirmPassword){                           //TODO: not sure is this is the best way to check their values
             fetch('http://localhost:5000/api/v1/users/user', {
                 method: 'POST',
@@ -35,11 +41,7 @@ const SignUpScreen = ({ navigation }) => {
 
     return(
         <View style={globalStyles.loginContainer}>
-            <Image
-                source={images.compnyAssets.logo}
-                style={globalStyles.logo}
-            />
-            <Text style={globalStyles.text}>App Name Placeholder</Text>
+            <Text style={globalStyles.text}>CodeViolet Sign Up</Text>
             <FormInput
                 lavelValue={email}
                 onChangeText={(userEmail) => setEmail(userEmail)}

@@ -1,12 +1,9 @@
 import React, {useState} from "react";
-import { StyleSheet, Text, View, Image, Dimensions, Platform, PixelRatio } from 'react-native';
+import { StyleSheet, CheckBox, Text, View, Image, Dimensions, Platform, PixelRatio, Linking } from 'react-native';
 import { globalStyles, images } from '../assets/styles/global';
 import { QuestionsInfo } from "../utils/QuestionsInfo";
 import QuestionBox from "../components/QuestionBox";
-//import { ScaleFromCenterAndroid } from "react-navigation-stack/lib/typescript/src/vendor/TransitionConfigs/TransitionPresets";
-// import 'bootstrap/dist/css/bootstrap.min.css'
-
-// import {Container, Row, Col} from 'react-bootstrap';
+import {windowHeight, windowWidth} from '../utils/Dimentions'
 
 const {
     width: SCREEN_WIDTH,
@@ -14,7 +11,6 @@ const {
 }= Dimensions.get('window')
 
 const scale = SCREEN_WIDTH/375
-
 function normalize(size){
     const newSize = size * scale
     if (Platform.OS == 'ios'){
@@ -25,72 +21,99 @@ function normalize(size){
     }
 }
 
+
 const Questions = ({ navigation }) => {
 
-    var stringOf75BoolValues = "0121"//Check user database
+    const[isSelected, setSelection] = useState(false)
+    var stringOf75BoolValues = "012100000000001110000222221111"//Check user database
 
-    var questionNumbersNotComplete = []
-    var questionNumbersInProgress = []
-    var questionNumbersComplete = []
 
-    for (let i = 0; i < stringOf75BoolValues.length; i++) {
-        if(stringOf75BoolValues.charAt(i) == '0'){
-            questionNumbersNotComplete.push(
-                <View key={i}>
-                    <QuestionBox name={QuestionsInfo.name[i]} difficulty={QuestionsInfo.difficulty[i]}></QuestionBox>
+    var questionEasy = []
+    var questionMedium = []
+    var questionHard = []
+
+    for (let i = 0; i <30; i++) {
+        const[isSelected, setSelection] = useState(false)
+        if(QuestionsInfo.difficulty[i] == "Easy"){
+           
+            questionEasy.push(
+                <View key={i} 
+                    style={{
+                        paddingLeft:windowWidth **2/(15000),
+                        paddingRight:windowWidth **2/(15000),
+                        }}>
+                    <QuestionBox name={QuestionsInfo.name[i]} idx={i}/>
+                    <Text style={{color: 'blue'}}
+                            onPress={() => Linking.openURL(QuestionsInfo.youtube_link[i])}>
+                        Youtube
+                    </Text>
+                    <View style={styles.container}>
+                        <View style={styles.checkboxContainer}>
+                            <CheckBox
+                            value={isSelected}
+                            onValueChange={setSelection}
+                            style={styles.checkbox}
+                            />
+                            <Text style={styles.label}>Completed</Text>
+                        </View>
+                    </View>
                 </View>
             );
         }
-        else if(stringOf75BoolValues.charAt(i) == '1'){
-            questionNumbersInProgress.push(
-                <View key={i}>
-                    <QuestionBox name={QuestionsInfo.name[i]} difficulty={QuestionsInfo.difficulty[i]}></QuestionBox>
+        else if(QuestionsInfo.difficulty[i] == "Medium"){
+            questionMedium.push(
+                <View key={i}
+                    style={{
+                        paddingLeft:windowWidth **2/(15000),
+                        paddingRight:windowWidth **2/(15000),
+                    }}
+                    >
+                    <QuestionBox name={QuestionsInfo.name[i]} idx={i}/>
+                    <Text style={{color: 'blue'}}
+                            onPress={() => Linking.openURL(QuestionsInfo.youtube_link[i])}>
+                        Youtube
+                    </Text>
+                    <View style={styles.container}>
+                        <View style={styles.checkboxContainer}>
+                            <CheckBox
+                            value={isSelected}
+                            onValueChange={setSelection}
+                            style={styles.checkbox}
+                            />
+                            <Text style={styles.label}>Completed</Text>
+                        </View>
+                    </View>
                 </View>
             );
         }
-        else if(stringOf75BoolValues.charAt(i) == '2'){
-            questionNumbersComplete.push(
-                <View key={i}>
-                    <QuestionBox name={QuestionsInfo.name[i]} difficulty={QuestionsInfo.difficulty[i]}></QuestionBox>
+        else if(QuestionsInfo.difficulty[i] == 'Hard'){
+            questionHard.push(
+                <View key={i}
+                    style={{
+                        paddingLeft:windowWidth **2/(15000),
+                        paddingRight:windowWidth **2/(15000),
+                    }}
+                    >
+                    <QuestionBox name={QuestionsInfo.name[i]} idx={i}/>
+                    <Text style={{color: 'blue'}}
+                            onPress={() => Linking.openURL(QuestionsInfo.youtube_link[i])}>
+                        Youtube
+                    </Text>
+                    <View style={styles.container}>
+                        <View style={styles.checkboxContainer}>
+                            <CheckBox
+                            value={isSelected}
+                            onValueChange={setSelection}
+                            style={styles.checkbox}
+                            />
+                            <Text style={styles.label}>Completed</Text>
+                        </View>
+                    </View>
                 </View>
             );
         }
     }
-    /*
-
-    var not_started = [];
-
-
-    //TODO:
-    for (let i = 0; i < 1; i++) {               //Replace 1 with 75
-        //if question is not started    //Check user database
-        not_started.push(
-            <View key={i}>
-                <Text>{Questions_json.name[0]}</Text>
-            </View>
-        );
-    }
-     
-    */
-     
-    // return(
-    //     <View style={globalStyles.loginContainer}>
-    //         <div>
-    //         <Container>
-    //             <Row>
-    //                 <Col>Not Started</Col>
-    //                 <Col>In Progress</Col>
-    //                 <Col>Complete</Col>
-    //             </Row>
-    //             <Row>
-    //                 <Col>{questionNumbersNotComplete}</Col>
-    //                 <Col>{questionNumbersInProgress}</Col>
-    //                 <Col>{questionNumbersComplete}</Col>
-    //             </Row>
-    //         </Container>
-    //         </div>
-    //     </View>
-    // );
+   
     return (
         <View style={[styles.container, {
           // Try setting `flexDirection` to `"row"`.
@@ -98,19 +121,18 @@ const Questions = ({ navigation }) => {
         }]}>
           <View style={{ flex: 1, backgroundColor: "#DFC9F8" }}>
                 <Text numberOfLines={1}
-                    adjustsFontSizeToFit
                     style = {styles.titleText}>
-                    Not Started
+                    Easy
                 </Text>
-                {questionNumbersNotComplete}
+                {questionEasy}
           </View>
           <View style={{ flex: 1, backgroundColor: "#944AE8" }}>
-                <Text style = {styles.titleText}>In Progress</Text>
-                {questionNumbersInProgress}
+                <Text style = {styles.titleText}>Medium</Text>
+                {questionMedium}
           </View>
           <View style={{ flex: 1, backgroundColor: "#6117B5" }}>
-                <Text style = {styles.titleText}>Completed</Text>
-                {questionNumbersComplete}
+                <Text style = {styles.titleText}>Hard</Text>
+                {questionHard}
         </View>
         </View>
       );
@@ -119,10 +141,10 @@ const Questions = ({ navigation }) => {
 const styles = StyleSheet.create({
     baseText: {
         fontFamily: "Cochin",
-        fontSize: normalize(20),
+        fontSize: normalize(10),
     },
     titleText: {
-        fontSize: normalize(20),
+        fontSize: normalize(10),
         fontWeight: "bold",
         textAlign: "center"
     },
@@ -131,7 +153,14 @@ const styles = StyleSheet.create({
     },
     button:{
         color:"#3C0F6F"
-    }
+    },
+    checkboxContainer: {
+        flexDirection: "row",
+        marginBottom: 20,
+    },
+    checkbox: {
+        alignSelf: "center",
+    },
 });
 
 export default Questions;

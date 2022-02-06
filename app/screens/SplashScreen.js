@@ -20,7 +20,8 @@ function SplashScreen({ navigation })  {
                 justifyContent: 'center',}}>
 
                 <Text style={{fontSize:80,
-                    color:'#ffc2e0',}}>
+                    color:'#ffc2e0',
+                    }}>
                     CodeViolet</Text>
                 </View>
                 
@@ -28,10 +29,7 @@ function SplashScreen({ navigation })  {
                 textAlign:'center',}}>
                 <Text style={{color:'#ffc2e0', 
                     fontSize:30,}}>
-                    What is the CodeViolet website</Text>
-
-                <Text style={{color:'#ffc2e0'}}> 
-                    ...</Text>
+                     Got a Coding Interview? Don't sweat, use CodeViolet!</Text>
             </View>
             </ImageBackground>
         </View>
