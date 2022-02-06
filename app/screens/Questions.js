@@ -39,8 +39,8 @@ const Questions = ({ navigation }) => {
             questionEasy.push(
                 <View key={i} 
                     style={{
-                        paddingLeft:windowWidth **2/(15000),
-                        paddingRight:windowWidth **2/(15000),
+                        paddingLeft:Math.min(windowWidth/ 15, windowWidth **2/(15000)),
+                        paddingRight:Math.min(windowWidth/ 15, windowWidth **2/(15000)),
                         }}>
                     <QuestionBox name={QuestionsInfo.name[i]} idx={i}/>
                     <Text style={{color: 'blue'}}
@@ -64,8 +64,8 @@ const Questions = ({ navigation }) => {
             questionMedium.push(
                 <View key={i}
                     style={{
-                        paddingLeft:windowWidth **2/(15000),
-                        paddingRight:windowWidth **2/(15000),
+                        paddingLeft:Math.min(windowWidth/ 15, windowWidth **2/(15000)),
+                        paddingRight:Math.min(windowWidth/ 15, windowWidth **2/(15000)),
                     }}
                     >
                     <QuestionBox name={QuestionsInfo.name[i]} idx={i}/>
@@ -90,8 +90,8 @@ const Questions = ({ navigation }) => {
             questionHard.push(
                 <View key={i}
                     style={{
-                        paddingLeft:windowWidth **2/(15000),
-                        paddingRight:windowWidth **2/(15000),
+                        paddingLeft:Math.min(windowWidth/ 15, windowWidth **2/(15000)),
+                        paddingRight:Math.min(windowWidth/ 15, windowWidth **2/(15000)),
                     }}
                     >
                     <QuestionBox name={QuestionsInfo.name[i]} idx={i}/>
